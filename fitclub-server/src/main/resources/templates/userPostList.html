@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/main.css}" />
+</head>
+<body>
+    <ul>
+        <li th:each="post : ${userPosts}">
+            <div class="date" th:text="${post.date}"></div>
+            <div class="week" th:text="FitClub ${post.week}"></div>
+            <div class="url"><a th:href="@{${post.url}}" /></div>
+            <div class="post" th:utext="${post.message}"></div>
+        </li>
+    </ul>
+</body>
+</html>

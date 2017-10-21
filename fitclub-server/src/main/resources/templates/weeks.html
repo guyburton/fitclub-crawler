@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/main.css}" />
+</head>
+<body>
+<ul>
+    <li th:each="week : ${weeks}">
+        <span class="weekId" th:text="${week.id}" />
+        <span class="url" th:text="${week.url}" />
+    </li>
+</ul>
+</body>
+</html>
