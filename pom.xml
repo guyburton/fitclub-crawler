@@ -63,5 +63,6 @@
         <module>fitclub-store</module>
         <module>fitclub-crawler</module>
         <module>fitclub-server</module>
+        <module>fitclub-site-generator</module>
     </modules>
 </project>

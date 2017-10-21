@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @RequestMapping("/user/{username}")
-    public ModelAndView getUserPostsExample(@PathVariable(name = "username") String username) {
+    public ModelAndView getUserPosts(@PathVariable(name = "username") String username) {
         JpaUser user = userRepository.findOne(username);
         List<JpaPost> posts = postRepository.findByUsername(username);
 

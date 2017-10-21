@@ -47,4 +47,11 @@ public class JpaUser {
     public void setFirstPosted(LocalDate postDate) {
         this.firstPosted = postDate;
     }
+
+    @Override
+    public String toString() {
+        return "JpaUser{" +
+            "username='" + username + '\'' +
+            '}';
+    }
 }
