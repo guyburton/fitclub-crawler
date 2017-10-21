@@ -15,13 +15,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Component
 public class PageParser {
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
-    public ParsedPage parse(String content) {
+    public ParsedPage parse(String content, String url) {
         Document document = Jsoup.parse(content);
 
         String threadTitle = document.select("#thread-title").text();
@@ -43,8 +44,8 @@ public class PageParser {
             parseDate(postedAt),
             postedBy,
             postId,
-            getPosts(document)
-        );
+            getPosts(document),
+            url);
     }
 
     private LocalDate parseDate(String postedAt) {
@@ -75,12 +76,22 @@ public class PageParser {
                 continue;
             }
             Elements author = element.select(".author>a[title=\"View Profile\"");
+            if (author.isEmpty()) {
+                author = element.select(".author>a[title=\"No Profile\"");
+            }
             if (!author.isEmpty()) {
                 Element authorLink = author.get(0);
                 currentUser = authorLink.text();
             } else {
                 String message = element.html();
-                message = message.substring(message.indexOf(":") + 1).substring(13);
+
+                Pattern pattern = Pattern.compile("^.*In reply to</a> (.+?): ");
+                Matcher matcher = pattern.matcher(message);
+                if (matcher.find()) {
+                    message = matcher.replaceFirst("");
+                }
+
+                checkNotNull(currentUser, "Parse error - didnt find user in element: " + element);
                 posts.add(new ParsedPost(message, currentUser));
                 currentUser = null;
             }

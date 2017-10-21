@@ -18,7 +18,7 @@ public class JpaPost {
 
     @ManyToOne(fetch=FetchType.EAGER, optional = false)
     @JoinColumn(name="WeekId")
-    private JpaFitClubWeek fitClubWeek;
+    private JpaFitClubWeek week;
 
     protected JpaPost() {
 
@@ -33,7 +33,7 @@ public class JpaPost {
         return id;
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return username;
     }
 
@@ -41,11 +41,12 @@ public class JpaPost {
         return message;
     }
 
-    public JpaFitClubWeek getFitClubWeek() {
-        return fitClubWeek;
+    public JpaFitClubWeek getWeek() {
+        return week;
     }
 
-    public void setFitClubWeek(JpaFitClubWeek fitClubWeek) {
-        this.fitClubWeek = fitClubWeek;
+    public void setWeek(JpaFitClubWeek week) {
+        this.week = week;
     }
+
 }

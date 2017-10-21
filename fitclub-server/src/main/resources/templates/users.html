@@ -1,14 +1,23 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Unofficial UKC FitClub Indexing Service</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/main.css}"/>
 </head>
 <body>
-<ul th:each="user : ${users}">
-    <li><a th:href="@{/user/{userId}(userId=${user})}" th:text="${user}" /></li>
-</ul>
+<div th:replace="header :: header"></div>
+
+<div id="user-list-content" class="main-content">
+    <div class="users-header"><h2>All Users</h2></div>
+    <ul id="user-list">
+        <li th:each="user : ${users}">
+            <a th:href="@{/user/{userId}(userId=${user.username})}" th:text="${user.username}"/> (last posted: <span
+                th:text="${user.lastPosted}"/>)
+        </li>
+    </ul>
+</div>
+
 </body>
 </html>

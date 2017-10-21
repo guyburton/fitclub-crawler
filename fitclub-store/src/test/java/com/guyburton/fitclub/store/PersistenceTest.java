@@ -65,7 +65,7 @@ public class PersistenceTest {
         List<JpaPost> fitClubWeeks = postRepository.findAll();
         assertThat(fitClubWeeks, hasSize(1));
         JpaPost post = getOnlyElement(fitClubWeeks);
-        assertThat(post.getFitClubWeek(), notNullValue());
+        assertThat(post.getWeek(), notNullValue());
     }
 
 }

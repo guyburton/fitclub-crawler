@@ -1,5 +1,6 @@
 package com.guyburton.fitclub.controller;
 
+import com.google.common.collect.Ordering;
 import com.guyburton.fitclub.store.entities.JpaFitClubWeek;
 import com.guyburton.fitclub.store.repository.FitClubWeekRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,10 @@ public class WeekController {
         List<JpaFitClubWeek> weeks = fitClubWeekRepository.findAll();
 
         return new ModelAndView("weeks", "weeks",
-            weeks.stream().collect(Collectors.toSet()));
+            weeks.stream()
+            .sorted(Ordering.natural().onResultOf(JpaFitClubWeek::getId))
+            .collect(Collectors.toList()));
     }
-
 
     @RequestMapping("/week/{id}")
     public ModelAndView getWeek(@PathVariable("id") Integer weekId) {

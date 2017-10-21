@@ -2,6 +2,7 @@ package com.guyburton.fitclub;
 
 import com.guyburton.fitclub.store.repository.FitClubWeekRepository;
 import com.guyburton.fitclub.store.repository.PostRepository;
+import com.guyburton.fitclub.store.repository.UserRepository;
 import org.apache.commons.cli.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -25,6 +26,9 @@ public class Main implements CommandLineRunner {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -52,10 +56,12 @@ public class Main implements CommandLineRunner {
             cmd = parser.parse(options, args);
 
             if (cmd.hasOption(clear.getOpt())) {
-                fitClubWeekRepository.deleteAll();
-                fitClubWeekRepository.flush();
-                postRepository.deleteAll();
+                postRepository.deleteAllInBatch();
                 postRepository.flush();
+                fitClubWeekRepository.deleteAllInBatch();
+                fitClubWeekRepository.flush();
+                userRepository.deleteAllInBatch();
+                userRepository.flush();
             }
 
             String crawlUrl = cmd.getOptionValue(crawl.getOpt());

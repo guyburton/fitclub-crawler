@@ -21,7 +21,7 @@ public class JpaFitClubWeek {
     @Column(name = "URL")
     private String url;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "fitClubWeek", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "week", fetch = FetchType.EAGER)
     private List<JpaPost> posts;
     public JpaFitClubWeek() {
     }
@@ -32,7 +32,7 @@ public class JpaFitClubWeek {
         this.postedBy = postedBy;
         this.url = url;
         this.posts = posts;
-        posts.forEach(p -> p.setFitClubWeek(this));
+        posts.forEach(p -> p.setWeek(this));
     }
 
     public Integer getId() {

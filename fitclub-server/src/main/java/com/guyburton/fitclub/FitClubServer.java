@@ -11,6 +11,4 @@ public class FitClubServer {
         SpringApplication.run(FitClubServer.class, args);
     }
 
-
-
 }

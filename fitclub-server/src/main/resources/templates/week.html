@@ -9,12 +9,11 @@
 <body>
 <div th:replace="header :: header"></div>
 <div class="main-content">
-<h2>Indexed FitClub Weeks:</h2>
+<h2>Week <span th:text="${week.id}" /></h2>
+<h3>Posted on <span th:text="${week.postDate}" /> by <span th:text="${week.postedBy}"/> </h3>
 <ul>
-    <li th:each="week : ${weeks}">
-        <span class="weekId" th:text="${week.id}" />
-        <a class="url" th:href="@{${week.url}}">Click to go to UKC Thread</a>
-        <a class="url" th:href="@{/week/{weekId}(weekId=${week.id})}">Click see posts</a>
+    <li th:each="post : ${week.posts}">
+        <span class="post" th:text="${post.username}" />
     </li>
 </ul>
 </div>
