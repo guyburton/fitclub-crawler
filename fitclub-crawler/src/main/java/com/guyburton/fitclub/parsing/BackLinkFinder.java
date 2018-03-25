@@ -10,12 +10,15 @@ import java.util.regex.Pattern;
 @Component
 public class BackLinkFinder {
 
+    private static final String REGEX = "Last week.?s .*?" +
+        "(https://www\\.ukclimbing\\.com/forums/(?:walls\\+training/)?+[\\w\\d\\-_=?\\.]+)";
+
     public URL findLink(URL url, String body) throws MalformedURLException, BackLinkNotFoundException {
-        Pattern pattern = Pattern.compile("Last week.?s thread can be found here:.*?https?://www\\.ukclimbing\\.com/forums/t\\.php\\?\\w=(\\d+)");
+        Pattern pattern = Pattern.compile(REGEX, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CHARACTER_CLASS | Pattern.MULTILINE | Pattern.UNICODE_CHARACTER_CLASS | Pattern.DOTALL);
         Matcher matcher = pattern.matcher(body);
 
         if (matcher.find()) {
-            return new URL("https://www.ukclimbing.com/forums/t.php?n=" + matcher.group(1));
+            return new URL(matcher.group(1));
         }
         throw new BackLinkNotFoundException(url.toString());
     }

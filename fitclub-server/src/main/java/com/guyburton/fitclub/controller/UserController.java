@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,12 +28,13 @@ public class UserController {
         this.postRepository = postRepository;
     }
 
-    @RequestMapping("/user")
+    @RequestMapping("/users.html")
     public ModelAndView get() {
         List<JpaUser> users = userRepository.findAll();
 
         return new ModelAndView("users", "users",
             users.stream()
+                .filter(user -> user.getLastPosted().isAfter(LocalDate.of(2018,1,1)))
                 .sorted(Ordering.natural().onResultOf(JpaUser::getUsername))
                 .collect(Collectors.toList()));
     }

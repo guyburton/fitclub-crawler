@@ -1,13 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Unofficial UKC FitClub Indexing Service</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" th:href="@{/main.css}" />
 </head>
 <body>
     <div th:replace="header :: header"></div>
-    <div class="back-link"><a th:href="@{/user/}">Back to user index</a></div>
+    <div class="back-link"><a th:href="@{/users.html}">Back to user index</a></div>
     <div id="main-content">
         <div class="user-header"><h2 th:text="${user.username}"/> (<span th:text="${user.posts.size()}" /> posts)</div>
         <ul id="post-list">

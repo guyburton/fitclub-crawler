@@ -44,6 +44,8 @@ public class Crawler {
         pageAccesses++;
         if (pageAccesses < maxPages) {
             crawlFrom(backLink, maxPages);
+        } else {
+            System.out.println("Reached end of crawl- " + pageAccesses + " page accesses");
         }
     }
 

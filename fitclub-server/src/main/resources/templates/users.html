@@ -13,7 +13,7 @@
     <div class="users-header"><h2>All Users</h2></div>
     <ul id="user-list">
         <li th:each="user : ${users}">
-            <a th:href="@{/user/{userId}(userId=${user.username})}" th:text="${user.username}"/> (last posted: <span
+            <a th:href="@{/user/{userId}.html(userId=${user.username})}" th:text="${user.username}"/> (last posted: <span
                 th:text="${user.lastPosted}"/>)
         </li>
     </ul>
