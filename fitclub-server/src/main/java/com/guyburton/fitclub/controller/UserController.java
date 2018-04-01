@@ -32,11 +32,12 @@ public class UserController {
     public ModelAndView get() {
         List<JpaUser> users = userRepository.findAll();
 
-        return new ModelAndView("users", "users",
-            users.stream()
-                .filter(user -> user.getLastPosted().isAfter(LocalDate.of(2018,1,1)))
-                .sorted(Ordering.natural().onResultOf(JpaUser::getUsername))
-                .collect(Collectors.toList()));
+        List<JpaUser> usersToDisplay = users.stream()
+            .filter(user -> user.getLastPosted().isAfter(LocalDate.of(2018, 1, 1)))
+            .sorted(Ordering.natural().onResultOf(u -> u.getUsername().toLowerCase()))
+            .collect(Collectors.toList());
+
+        return new ModelAndView("users", "users", usersToDisplay);
     }
 
     @RequestMapping("/user/{username}")

@@ -3,24 +3,24 @@
 <head>
     <title>Unofficial UKC FitClub Indexing Service</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" th:href="@{/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{../main.css}" />
 </head>
 <body>
     <div th:replace="header :: header"></div>
-    <div class="back-link"><a th:href="@{/users.html}">Back to user index</a></div>
+    <div class="back-link"><a th:href="@{../users.html}">Back to user index</a></div>
     <div id="main-content">
         <div class="user-header"><h2 th:text="${user.username}"/> (<span th:text="${user.posts.size()}" /> posts)</div>
         <ul id="post-list">
             <li th:each="post : ${user.posts}">
                 <div class="post-header">
-                    <div class="week"><span class="date" th:text="${post.week.postDate}" /> FitClub Week <span th:text="${post.week.id}" /></div>
+                    <div class="week"><spanª class="date" th:text="${post.week.postDate}" /> FitClub Week <span th:text="${post.week.id}" /></div>
                     <div class="url"><a th:href="@{${post.week.url}}" th:text="${post.week.url}" /></div>
                 </div>
                 <hr />
                 <div class="post" th:utext="${post.message}"></div>
             </li>
         </ul>
-        <div class="back-link"><a th:href="@{/user/}">Back to user index</a></div>
+        <div class="back-link"><a th:href="@{../users.html}">Back to user index</a></div>
     </div>
 </body>
 </html>

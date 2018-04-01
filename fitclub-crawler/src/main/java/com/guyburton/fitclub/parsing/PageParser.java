@@ -28,7 +28,8 @@ public class PageParser {
         String threadTitle = document.select("#thread-title").text();
         Pattern pattern = Pattern.compile("\\d+");
         Matcher matcher = pattern.matcher(threadTitle);
-        checkArgument(matcher.find(), "Could not find week ID in title: " + threadTitle + " from " + url);
+        boolean foundTitle = matcher.find();
+        checkArgument(foundTitle, "Could not find week ID in title: " + threadTitle + " from " + url);
         Integer postId = Integer.parseInt(matcher.group());
 
         Elements elements = document.select("#threadText .author");

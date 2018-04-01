@@ -29,6 +29,9 @@ public class PageLoader {
     }
 
     public String load(URL startingUrl) throws IOException {
+        if (startingUrl.toExternalForm().contains("http://")) {
+            startingUrl = new URL(startingUrl.toExternalForm().replace("http://", "https://"));
+        }
 
         LoadedPage previouslyLoadedPage = loadedPageRepository.findOne(startingUrl.toString());
         if (previouslyLoadedPage != null) {
