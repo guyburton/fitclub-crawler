@@ -27,6 +27,14 @@ public class BackLinkFinderTest {
     }
 
     @Test
+    public void testExtractBackLinkFromOldStylePostWithHttp() throws MalformedURLException, BackLinkNotFoundException {
+        URL link = new BackLinkFinder().findLink(new URL("http://www.test.com"),
+            "<p>Last week’s thread can be found here: </p><p><a href=\"http://www.ukclimbing.com/forums/t.php?t=676592\" title=\"UKC Forums - Fitclub 563\">https://www.ukclimbing.com/forums/t.php?t=676592</a></p>");
+
+        assertThat(link.toExternalForm(), equalTo("http://www.ukclimbing.com/forums/t.php?t=676592"));
+    }
+
+    @Test
     public void noSpaceOrLink() throws MalformedURLException, BackLinkNotFoundException {
         URL link = new BackLinkFinder().findLink(new URL("http://www.test.com"),
             "<p>Last week’s thread can be found \"here:https://www.ukclimbing.com/forums/walls+training/fitclub_570-679517</p>");
